@@ -34,12 +34,12 @@ io.use(passportSocketIo.authorize({
 }))
 
 function onAuthorizeSuccess(data, accept) {
-  console.log('Authorize Success!') // first
+  //console.log('Authorize Success!') // first
   accept()
 }
 
 function onAuthorizeFail(data, message, error, accept) {
-  console.log('Authorize Fail!')
+  //console.log('Authorize Fail!')
   if (error) {
     // thuc ra khong can check error vi se luon co loi
     accept(new Error(message))
@@ -49,7 +49,7 @@ function onAuthorizeFail(data, message, error, accept) {
 
 mongoose.connect(config.database, function (err) {
   if (err) console.log(err);
-  console.log("connected to the database");
+  //console.log("connected to the database");
 });
 mongoose.Promise = global.Promise;
 
@@ -75,7 +75,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(function (req, res, next) {
-  // console.log(req.user) // (luu trong session, neu khong co se tra ve undifined)
+  console.log('userAllView',req.user) // (luu trong session, neu khong co se tra ve undifined)
   res.locals.userAllView = req.user // xxxx now we can access userAllView variable in every 
   next()
 })

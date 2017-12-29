@@ -8,14 +8,12 @@ const Tweet = require('../models/tweet');
 router.get('/', async (req, res, next) => {
 
   if (req.user) {
-    console.clear()
-    console.log('req.user', req.user)
+   // console.log('req.user', req.user)
     var listt = [req.user._id, ...req.user.following]
     try {
       let tweets = await Tweet.find({ owner: listt }).sort('-created').populate('owner').exec()
-      console.log(tweets)
+     // console.log(tweets)
       res.render('main/home', { tweets })
-
     } catch (error) {
       next(error)
     }
@@ -45,7 +43,7 @@ router.get('/user/:id', async (req, res, next) => {
 
 
     // console.log(tweets)
-    console.log('user', user)
+    // console.log('user', user)
 
     res.render('main/user', { foundUser: user, tweets, pageOfHimself, inFollowerList })
   } catch (error) {
@@ -60,7 +58,7 @@ router.get('/tweet/:id', async (req, res, next) => {
     let user = await
 
 
-      console.log('tweet', tweet)
+    //  console.log('tweet', tweet)
     res.render('main/tweet', { tweet })
   } catch (error) {
     next(error)

@@ -40,3 +40,11 @@
     </div>
   </div>
 </div>
+
+<ul class="hidden">
+  {{#each userAllView.following}}
+    <li> {{this}} </li>
+  {{/each}}
+</ul>
+<input id="listOfFollowing" value="{{userAllView.following}}" type="hidden">
+<input id="idOfCurrentLoginUser" value="{{userAllView._id}}" type="hidden">
