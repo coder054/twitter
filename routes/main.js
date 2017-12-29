@@ -8,9 +8,11 @@ const Tweet = require('../models/tweet');
 router.get('/', async (req, res, next) => {
 
   if (req.user) {
-    console.log('1user', req.user)
+    console.clear()
+    console.log('req.user', req.user)
+    var listt = [req.user._id, ...req.user.following]
     try {
-      let tweets = await Tweet.find({}).sort('-created').populate('owner').exec()
+      let tweets = await Tweet.find({ owner: listt }).sort('-created').populate('owner').exec()
       console.log(tweets)
       res.render('main/home', { tweets })
 
