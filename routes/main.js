@@ -8,11 +8,21 @@ const Tweet = require('../models/tweet');
 router.get('/', async (req, res, next) => {
 
   if (req.user) {
-   // console.log('req.user', req.user)
+    // console.log('req.user', req.user)
     var listt = [req.user._id, ...req.user.following]
     try {
-      let tweets = await Tweet.find({ owner: listt }).sort('-created').populate('owner').exec()
-     // console.log(tweets)
+      let tweets = await Tweet.find({ owner: listt }).sort('-created').populate('owner').lean().exec()
+
+      let currentUserId = req.user._id
+      tweets.forEach(function (val, index) {
+        if (val.owner._id == currentUserId || val.owner._id.equals(currentUserId)) {
+          val.isTweetOfCurrentUser = true
+        } else {
+          val.isTweetOfCurrentUser = false
+        }
+      })
+
+
       res.render('main/home', { tweets })
     } catch (error) {
       next(error)
@@ -58,8 +68,8 @@ router.get('/tweet/:id', async (req, res, next) => {
     let user = await
 
 
-    //  console.log('tweet', tweet)
-    res.render('main/tweet', { tweet })
+      //  console.log('tweet', tweet)
+      res.render('main/tweet', { tweet })
   } catch (error) {
     next(error)
   }
@@ -114,5 +124,39 @@ router.post('/unfollow/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/tweet/:id', async (req, res, next) => {
+  console.log('current user id:', req.user._id)
+  console.log('tweet need delete id:', req.params.id)
+
+
+  try {
+    let tweet = await Tweet.findById(req.params.id).populate('owner').exec()
+    console.log('tweet', tweet)
+
+    if (tweet.owner._id.equals(req.user._id)) {
+      // the tweet need delete belong to the logined user
+
+      // delete the tweet
+      let deletedTweet = await Tweet.findByIdAndRemove(req.params.id)
+
+      // remove reference on user collection
+      let updatedUser = await User.update(
+        { _id: req.user._id },
+        {
+          $pull: {
+            tweets: { tweet: deletedTweet._id }
+          }
+        }
+      )
+    }
+
+  } catch (error) {
+    next(error)
+  }
+
+  res.send('fdsfds')
+})
+
 
 module.exports = router;

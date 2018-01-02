@@ -14,10 +14,11 @@ module.exports = function (io) {
     }
     socket.on('tweet', async function (data) {
       console.log('on tweet data:', data)
-      // emit 
+      
       // save tweet content (with owner info) to to tweet collection
       // push tweet Id to field: tweets of user collection
-      io.emit('incomingTweet', ({ data, user }))
+      // emit 
+      
       try {
         const tweet = new Tweet({
           owner: user._id,
@@ -34,6 +35,8 @@ module.exports = function (io) {
             }
           }
         )
+
+        io.emit('incomingTweet', ({ data, user, newTweetId: newTweet._id }))
       } catch (error) {
         console.log(error)
       }

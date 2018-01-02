@@ -25,10 +25,13 @@ $(function () {
         inListOfFollowing = true
       }
     });
-
+//<span data-idtweet="{{_id}}" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>
     if (inListOfFollowing || idOfCurrentLoginUser == idOfUserMakeTweet) {
       let html = ''
       html += '<div class="media">'
+      if(idOfCurrentLoginUser == idOfUserMakeTweet){
+        html += '<span data-idtweet="'+ data.newTweetId +'" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>'
+      }
       html += '<div class="media-left">'
       html += '<a href="/user/' + data.user._id + '">'
       html += '<img class="media-object" src=" ' + data.user.photo + ' " />'
@@ -43,8 +46,6 @@ $(function () {
     } else {
 
     }
-
-
   })
 })
 
