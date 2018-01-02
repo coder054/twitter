@@ -155,7 +155,7 @@ router.delete('/tweet/:id', async (req, res, next) => {
     next(error)
   }
 
-  res.send('fdsfds')
+  res.json('delete success')
 })
 
 

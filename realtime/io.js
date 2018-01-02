@@ -14,11 +14,10 @@ module.exports = function (io) {
     }
     socket.on('tweet', async function (data) {
       console.log('on tweet data:', data)
-      
+
       // save tweet content (with owner info) to to tweet collection
       // push tweet Id to field: tweets of user collection
       // emit 
-      
       try {
         const tweet = new Tweet({
           owner: user._id,
@@ -40,6 +39,11 @@ module.exports = function (io) {
       } catch (error) {
         console.log(error)
       }
+    })
+
+
+    socket.on('delete-tweet', async function (data) {
+      io.emit('delete-tweet-to-client', ({ data }))
     })
   })
 }

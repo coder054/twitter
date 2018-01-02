@@ -1,4 +1,5 @@
-<div class="starter-template">
+<div class="starter-template" id="starter-template">
+  <div class="alert alert-success tweet-delete-success"> Tweet Deleted Successfully! </div>
   <p class="lead">What is happening?</p>
 </div>
 
@@ -14,8 +15,8 @@
 
   <div id="tweets">
     {{#each tweets}}
-    <div class="media">
-      
+    <div class="media" id="tweet-{{_id}}">
+
       {{#if isTweetOfCurrentUser}}
       <span data-idtweet="{{_id}}" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>
       {{/if}}
