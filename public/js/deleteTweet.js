@@ -29,6 +29,7 @@ $(function () {
   socket.on('delete-tweet-to-client', function (data) {
     var tweetIdDeleted = data.data.tweetId;
     var idDom = '#tweet-' + tweetIdDeleted;
+    console.log(idDom)
     $(idDom).remove()
   })
 

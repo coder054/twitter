@@ -25,12 +25,12 @@ $(function () {
         inListOfFollowing = true
       }
     });
-//<span data-idtweet="{{_id}}" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>
+    //<span data-idtweet="{{_id}}" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>
     if (inListOfFollowing || idOfCurrentLoginUser == idOfUserMakeTweet) {
       let html = ''
-      html += '<div class="media">'
-      if(idOfCurrentLoginUser == idOfUserMakeTweet){
-        html += '<span data-idtweet="'+ data.newTweetId +'" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>'
+      html += '<div class="media" id="tweet-' + data.newTweetId + '">'
+      if (idOfCurrentLoginUser == idOfUserMakeTweet) {
+        html += '<span data-idtweet="' + data.newTweetId + '" class="glyphicon glyphicon-remove remove-icon" aria-hidden="true"></span>'
       }
       html += '<div class="media-left">'
       html += '<a href="/user/' + data.user._id + '">'
