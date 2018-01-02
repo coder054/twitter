@@ -87,7 +87,8 @@ app.use(mainRoutes);
 app.use(userRoutes);
 
 
-http.listen(3030, (err) => {
+http.listen(process.env.PORT || 3030, (err) => {
   if (err) console.log(err);
-  console.log(`Running on port ${3030}`);
+  // console.log(`Running on port ${3030}`);
 });
+
