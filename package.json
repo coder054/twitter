@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
+  },
+  "nodemonConfig": {
+    "ignore": ["test/*", "docs/*"],
+    "delay": "3500"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +26,7 @@
     "hbs": "^4.0.1",
     "mongoose": "^4.9.7",
     "morgan": "^1.8.1",
-    "nodemon": "^1.14.3",
+    "nodemon": "^1.18.7",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport.socketio": "^3.7.0",
