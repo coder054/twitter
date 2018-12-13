@@ -13,5 +13,5 @@ Cách test:
 # How to install
 - Clone this repository
 - CD in to folder
-- Run: npm install
+- Run: yarn
 - Open: 127.0.0.1:3030
